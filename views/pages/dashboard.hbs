@@ -1,0 +1,26 @@
+<div class="dashboard">
+  <h2>Welcome back, {{user.name}}</h2>
+  <p class="text-muted">Role: {{user.role}} &nbsp;|&nbsp; <a href="/profile">Edit Profile</a></p>
+
+  <h3>Recent Orders</h3>
+  {{#if orders.length}}
+    <table class="table">
+      <thead>
+        <tr><th>Order ID</th><th>Status</th><th>Total</th><th>Date</th></tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+        <tr>
+          <td><a href="/orders/{{id}}">{{id}}</a></td>
+          <td><span class="badge badge-{{status}}">{{status}}</span></td>
+          <td>{{formatPrice total}}</td>
+          <td>{{formatDate createdAt}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <a href="/orders">View all orders →</a>
+  {{else}}
+    <p>No orders yet. <a href="/products">Start shopping</a>.</p>
+  {{/if}}
+</div>

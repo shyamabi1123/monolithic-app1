@@ -1,0 +1,22 @@
+<h2>My Orders</h2>
+{{#if orders.length}}
+<table class="table">
+  <thead>
+    <tr><th>Order ID</th><th>Status</th><th>Total</th><th>Items</th><th>Date</th><th></th></tr>
+  </thead>
+  <tbody>
+    {{#each orders}}
+    <tr>
+      <td>{{id}}</td>
+      <td><span class="badge badge-{{status}}">{{status}}</span></td>
+      <td>{{formatPrice total}}</td>
+      <td>{{items.length}}</td>
+      <td>{{formatDate createdAt}}</td>
+      <td><a href="/orders/{{id}}">View</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{else}}
+  <p>No orders yet. <a href="/products">Start shopping</a>.</p>
+{{/if}}

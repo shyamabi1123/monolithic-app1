@@ -1,0 +1,44 @@
+<div class="page-header">
+  <h2>Products</h2>
+  <form action="/products" method="GET" class="search-form">
+    <input type="text" name="search" value="{{search}}" placeholder="Search products..." />
+    <select name="category">
+      <option value="">All categories</option>
+      {{#each categories}}
+        <option value="{{this}}" {{#if (eq this ../currentCategory)}}selected{{/if}}>{{this}}</option>
+      {{/each}}
+    </select>
+    <button type="submit" class="btn btn-secondary">Search</button>
+  </form>
+</div>
+
+<div class="product-grid">
+  {{#each products}}
+  <div class="product-card">
+    {{#if image}}
+      <img src="{{image}}" alt="{{name}}" class="product-img" />
+    {{else}}
+      <div class="product-img-placeholder">No image</div>
+    {{/if}}
+    <div class="product-info">
+      <h3><a href="/products/{{id}}">{{name}}</a></h3>
+      <p class="price">{{formatPrice price}}</p>
+      <p class="stock">{{stock}} in stock</p>
+      <form action="/cart/add" method="POST">
+        <input type="hidden" name="productId" value="{{id}}" />
+        <button type="submit" class="btn btn-primary" {{#unless stock}}disabled{{/unless}}>Add to Cart</button>
+      </form>
+    </div>
+  </div>
+  {{else}}
+    <p>No products found.</p>
+  {{/each}}
+</div>
+
+{{#if totalPages}}
+<div class="pagination">
+  {{#if (eq page 1)}}<span>← Prev</span>{{else}}<a href="/products?page={{subtract page 1}}&search={{search}}&category={{currentCategory}}">← Prev</a>{{/if}}
+  <span>Page {{page}} of {{totalPages}}</span>
+  {{#if (eq page totalPages)}}<span>Next →</span>{{else}}<a href="/products?page={{add page 1}}&search={{search}}&category={{currentCategory}}">Next →</a>{{/if}}
+</div>
+{{/if}}

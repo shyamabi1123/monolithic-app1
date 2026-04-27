@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{title}} — MonolithApp</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="brand">MonolithApp</a>
+    <ul class="nav-links">
+      <li><a href="/products">Products</a></li>
+      {{#if user}}
+        <li><a href="/cart">Cart</a></li>
+        <li><a href="/orders">Orders</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        {{#if (eq user.role "admin")}}
+          <li><a href="/admin/products">Admin</a></li>
+        {{/if}}
+        <li>
+          <form action="/auth/logout" method="POST" style="display:inline">
+            <button type="submit" class="btn-link">Logout</button>
+          </form>
+        </li>
+      {{else}}
+        <li><a href="/auth/login">Login</a></li>
+        <li><a href="/auth/register">Register</a></li>
+      {{/if}}
+    </ul>
+  </nav>
+
+  <main class="container">
+    {{#each success}}
+      <div class="alert alert-success">{{this}}</div>
+    {{/each}}
+    {{#each error}}
+      <div class="alert alert-error">{{this}}</div>
+    {{/each}}
+
+    {{{body}}}
+  </main>
+
+  <footer class="footer">
+    <p>&copy; {{formatDate "now"}} MonolithApp. Built with Node.js.</p>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
