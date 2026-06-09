@@ -1,15 +1,37 @@
-// Auto-dismiss alerts after 4 seconds
-document.querySelectorAll('.alert').forEach(el => {
-  setTimeout(() => {
-    el.style.transition = 'opacity 0.5s';
-    el.style.opacity = '0';
-    setTimeout(() => el.remove(), 500);
-  }, 4000);
-});
+document.addEventListener('DOMContentLoaded', () => {
 
-// Confirm destructive actions
-document.querySelectorAll('[data-confirm]').forEach(el => {
-  el.addEventListener('click', (e) => {
-    if (!confirm(el.dataset.confirm)) e.preventDefault();
+  // Auto dismiss alerts
+  const alerts = document.querySelectorAll('.alert');
+
+  alerts.forEach(alert => {
+    setTimeout(() => {
+      alert.style.transition = 'opacity 0.5s ease';
+      alert.style.opacity = '0';
+
+      setTimeout(() => {
+        if (alert.parentNode) {
+          alert.remove();
+        }
+      }, 500);
+
+    }, 4000);
   });
+
+  // Confirmation dialog for delete actions
+  const confirmButtons = document.querySelectorAll('[data-confirm]');
+
+  confirmButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+
+      const message =
+        button.dataset.confirm ||
+        'Are you sure you want to continue?';
+
+      if (!window.confirm(message)) {
+        event.preventDefault();
+      }
+
+    });
+  });
+
 });
