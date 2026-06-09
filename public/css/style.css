@@ -164,16 +164,54 @@ a {
 <body>
 
 <!-- Navbar -->
-<nav class="navbar">
-  <div class="brand">Shyam Store</div>
+.navbar{
+background:#131921;
+padding:15px 30px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
+}
 
-  <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Products</a></li>
-    <li><a href="#">Cart</a></li>
-    <li><a href="#">Login</a></li>
-  </ul>
-</nav>
+.logo{
+font-size:28px;
+font-weight:700;
+color:white;
+}
+
+.search-bar{
+flex:1;
+max-width:700px;
+}
+
+.search-bar form{
+display:flex;
+}
+
+.search-bar input{
+width:100%;
+padding:12px;
+border:none;
+outline:none;
+}
+
+.search-bar button{
+background:#febd69;
+border:none;
+padding:12px 20px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.nav-menu{
+display:flex;
+gap:20px;
+}
+
+.nav-menu a{
+color:white;
+font-weight:500;
+}
 
 <div class="container">
 
@@ -190,16 +228,41 @@ a {
 
   <div class="product-grid">
 
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600" class="product-img">
-      <div class="product-info">
-        <h3>iPhone 15 Pro</h3>
-        <div class="price">$1199</div>
-        <div class="stock">In Stock: 10</div>
-        <button class="btn btn-primary">Add to Cart</button>
-      </div>
-    </div>
+   <div class="product-card">
 
+<img src="{{product.image}}" class="product-img">
+
+<div class="product-info">
+
+<h3>{{product.name}}</h3>
+
+<div class="rating">
+⭐⭐⭐⭐☆
+</div>
+
+<div class="price">
+₹{{product.price}}
+</div>
+
+<div class="stock">
+{{product.stock}} available
+</div>
+
+<div class="product-buttons">
+
+<button class="cart-btn">
+Add To Cart
+</button>
+
+<a href="/products/{{product.id}}" class="buy-btn">
+View Details
+</a>
+
+</div>
+
+</div>
+
+</div>
     <div class="product-card">
       <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600" class="product-img">
       <div class="product-info">
